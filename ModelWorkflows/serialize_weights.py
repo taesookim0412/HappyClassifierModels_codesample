@@ -30,7 +30,6 @@ def load_saved_model_locally(model_fn):
     :return: model with adapted TextVectorization and loaded weights
     """
     model = joy_and_anger_lib_utils.create_model(None, os.path.join(os.getcwd(), "..", "datasets", "emotions", "joy_and_anger_vocab.txt"))
-    print(type(model))
     model.load_weights(os.path.join(os.getcwd(), "..", "Models", model_fn, model_fn))
 
     return model
