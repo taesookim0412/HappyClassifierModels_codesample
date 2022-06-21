@@ -61,11 +61,20 @@ def one_hot_encode_values(data_map: dict[str, str or float], values_map: dict[st
     return data_map
 
 class HappyClassifierDataset(Dataset):
-    def __init__(self):
-        train_data_map = load_data("train.txt")
-        values_map = one_hot_encode_values_map_fn(['joy', 'anger'])
-        one_hot_encode_values(train_data_map, values_map)
+    def __init__(self, fn: str, probabilistic = False):
+        train_data_map = load_data(fn)
+        if not probabilistic:
+            values_map = one_hot_encode_values_map_fn(['joy', 'anger'])
+            one_hot_encode_values(train_data_map, values_map)
+        else:
+            values_map = one_hot_encode_values_map_fn(['joy', 'anger'])
+            one_hot_encode_values(train_data_map, values_map)
+            if len(values_map) > 2:
+                raise NotImplementedError("Not yet implemented")
+            # temporary
+            train_data_map = { k: int(v) for k, v in train_data_map.items() }
         self.train_data = list(train_data_map.items())
+        print(self.train_data[0])
 
     def __len__(self):
         return len(self.train_data)
