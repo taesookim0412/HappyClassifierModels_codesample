@@ -2,6 +2,7 @@ import os
 import joblib
 import tensorflow as tf
 import Models.joy_and_anger.joy_and_anger_utils as joy_and_anger_lib_utils
+import app
 
 # export our trained vocab list since this wasn't done in the training process
 def export_vocab_list(data_fp):
@@ -29,8 +30,8 @@ def load_saved_model_locally(model_fn):
     :param model_fn: name of the model
     :return: model with adapted TextVectorization and loaded weights
     """
-    model = joy_and_anger_lib_utils.create_model(None, os.path.join(os.getcwd(), "..", "datasets", "emotions", "joy_and_anger_vocab.txt"))
-    model.load_weights(os.path.join(os.getcwd(), "..", "Models", model_fn, model_fn))
+    model = joy_and_anger_lib_utils.create_model(None, os.path.join(app.root(), "datasets", "emotions", "joy_and_anger_vocab.txt"))
+    model.load_weights(os.path.join(app.root(), "Models", model_fn, model_fn))
 
     return model
 

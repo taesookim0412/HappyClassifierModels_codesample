@@ -2,6 +2,7 @@ from typing import List
 
 import tensorflow as tf
 import os
+import app
 
 
 def create_model(encoder: tf.keras.layers.TextVectorization, vocab_list_fp: str) -> tf.keras.Model:
@@ -43,7 +44,7 @@ def load_data(fn:str, fp=None):
     if fp:
         txt_path = fp
     else:
-        txt_path = os.path.join(os.getcwd(), "..", "datasets", "emotions", fn)
+        txt_path = os.path.join(app.root(), "datasets", "emotions", fn)
 
     res = {}
     with open(txt_path) as f:

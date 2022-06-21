@@ -1,6 +1,7 @@
 from typing import List
 import os
 from torch.utils.data import Dataset
+import app
 
 def load_data(fn:str, fp=None):
     '''
@@ -12,7 +13,7 @@ def load_data(fn:str, fp=None):
     if fp:
         txt_path = fp
     else:
-        txt_path = os.path.join(os.getcwd(), "..", "datasets", "emotions", fn)
+        txt_path = os.path.join(app.root(), "datasets", "emotions", fn)
 
     res = {}
     with open(txt_path) as f:
