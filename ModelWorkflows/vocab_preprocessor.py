@@ -33,7 +33,7 @@ def _basic_english_normalize(line):
     Basic normalization for a line of text.
     Normalization includes
     - lowercasing
-    - complete some basic text normalization for English words as follows:
+    - complete some basic text normalization for En glish words as follows:
         add spaces before and after '\''
         remove '\"',
         add spaces before and after '.'
