@@ -58,8 +58,7 @@ def _basic_english_normalize(line):
 # Usage:
 # tokenizer = lambda line: _basic_english_normalize(line)
 
-
-
+# Note: pipeline should account for default_index ... this only returns a map for reverse purposes.
 def create_vocab(word_frequencies: dict[str, int], specials, min_freq = 1, special_first=True):
     '''
     Removes specials and puts them at the front or the beginning.
@@ -133,10 +132,12 @@ def build_vocab_from_tokenized_sentences_optimized(normalized_sentences_list: li
 # Usage:
 # build_vocab_from_tokenized_sentences_optimized(list(map(lambda k: tokenizer(k), [txt for txt, label in train_ds.train_data])), specials=["<unk>"])
 
+# note: This pipeline only supports one special and it will always default to one special (the default is 0).
 def vocab_from_custom_lambda(vocab_map, tokenized):
+    default_special_index = 0
     res = []
     for token in tokenized:
-        res.append(vocab_map.get(token, 0))
+        res.append(vocab_map.get(token, default_special_index))
     return res
 
 # Usage:
